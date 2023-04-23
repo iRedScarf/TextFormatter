@@ -2,63 +2,89 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>政府规章制度文本格式化工具</title>
+    <title>政府文件格式转换器</title>
     <style>
-        textarea {
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        input[type="text"], textarea {
             width: 100%;
-            height: 200px;
+            box-sizing: border-box;
+            font-size: 16px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            height: 40px;
+        }
+
+        input.longer {
+            width: 60%;
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <h1>政府规章制度文本格式化工具</h1>
-    <label for="title">标题（title）:</label>
-    <input type="text" id="title" name="title">
-    <br>
-    <label for="subtitle">文号（subtitle）:</label>
-    <input type="text" id="subtitle" name="subtitle">
-    <br>
-    <label for="tags">标签（tags，使用英文逗号分隔）:</label>
-    <input type="text" id="tags" name="tags">
-    <br>
-    <label for="author">发布机构（author）:</label>
-    <input type="text" id="author" name="author">
-    <br>
-    <label for="date">发布日期（date，格式: yyyy-mm-dd）:</label>
-    <input type="text" id="date" name="date">
-    <br>
-    <label for="inputText">输入原始文本:</label>
-    <textarea id="inputText"></textarea>
-    <br>
-    <button onclick="formatText()">格式化文本</button>
-    <br>
-    <label for="outputText">输出编辑好格式的文本:</label>
-    <textarea id="outputText" readonly></textarea>
+    <h1>政府文件格式转换器</h1>
+    <p>请在下面的输入框中输入标题、文号、标签、发布机构和发布日期：</p>
+    <input type="text" id="title" placeholder="标题">
+    <input type="text" id="subtitle" placeholder="文号">
+    <input type="text" class="longer" id="tags" placeholder="标签 (用逗号分隔)">
+    <input type="text" id="author" placeholder="发布机构">
+    <input type="text" id="date" placeholder="发布日期 (格式: yyyy-mm-dd)">
+    <p>请在下面的输入框中输入原始文本：</p>
+    <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
+    <button onclick="convert()">转换格式</button>
+    <p>转换后的文本将显示在下面的输出框中：</p>
+    <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
 
     <script>
-        function formatText() {
-            const title = document.getElementById('title').value;
-            const subtitle = document.getElementById('subtitle').value;
-            const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim());
-            const author = document.getElementById('author').value;
-            const date = document.getElementById('date').value;
-            const inputText = document.getElementById('inputText').value;
+        function convert() {
+            const title = document.getElementById("title").value;
+            const subtitle = document.getElementById("subtitle").value;
+            const tags = document.getElementById("tags").value.split(",").map(tag => tag.trim());
+            const author = document.getElementById("author").value;
+            const date = document.getElementById("date").value;
+            const inputText = document.getElementById("inputText").value;
 
-            const header = `---
+            const formattedText = `---
 title: ${title}
 subtitle: ${subtitle}
 tags: [${tags.join(', ')}]
 author: ${author}
 date: ${date}
----\n`;
+---
+` + inputText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
+                .replace(/((?<!第).+?条[\s\u00A0]*)(.*?)(\r?\n)/g, '<strong style="font-family: \'SimHei\', sans-serif;">$1</strong> $2\n')
+                .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n)/g, '\u3000\u3000$1\n');
 
-            const formattedText = inputText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
-                .replace(/(第.+?条)/g, '<strong style="font-family: \'SimHei\', sans-serif;">　　$1　</strong>')
-                .replace(/(\n)(?!<strong)/g, '\n　　')
-                .split('\n').join('\n');
-
-            document.getElementById('outputText').value = header + formattedText;
+            document.getElementById("outputText").value = formattedText;
         }
     </script>
 </body>
