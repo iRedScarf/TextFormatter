@@ -55,6 +55,7 @@ date: ${date}
 
             const formattedText = inputText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
                 .replace(/(第.+?条)/g, '<strong style="font-family: \'SimHei\', sans-serif;">　　$1　</strong>')
+                .replace(/(\n)(?!<strong)/g, '\n　　')
                 .split('\n').join('\n');
 
             document.getElementById('outputText').value = header + formattedText;
