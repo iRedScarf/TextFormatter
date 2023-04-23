@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件格式转换器</h1>
+     <h1>政府文件格式转换器</h1>
     <p>请在下面的输入框中输入标题、文号、标签、发布机构和发布日期：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -72,7 +72,7 @@
             const author = document.getElementById("author").value;
             const date = document.getElementById("date").value;
             const inputText = document.getElementById("inputText").value;
-            const preProcessedText = inputText.replace(/(^[ \u3000]+|[ \u3000]+$)/gm, "");
+            const preProcessedText = inputText.replace(/(^[ \u3000]+|[ \u3000]+$)/gm, "").replace(/(第.+?条)[\s\u00A0]*/g, '$1');
 
             const formattedText = `---
 title: ${title}
@@ -95,3 +95,4 @@ date: ${date}
 
 </body>
 </html>
+
