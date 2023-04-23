@@ -55,13 +55,13 @@
     <p>请在下面的输入框中输入标题、文号、标签、发布机构和发布日期：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
-    <input type="text" class="longer" id="tags" placeholder="标签 (用逗号分隔)">
+    <input type="text" id="tags" placeholder="标签（用半角逗号分隔）">
     <input type="text" id="author" placeholder="发布机构">
     <input type="text" id="date" placeholder="发布日期 (格式: yyyy-mm-dd)">
-    <p>请在下面的输入框中输入原始文本：</p>
+    <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
     <button onclick="convert()">转换格式</button>
-    <p>转换后的文本将显示在下面的输出框中：</p>
+    <p>转换后的文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
 
     <script>
