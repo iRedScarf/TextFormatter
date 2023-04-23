@@ -53,7 +53,7 @@ author: ${author}
 date: ${date}
 ---\n`;
 
-            const formattedText = inputText.replace(/(第.+?章[\s\u00A0]+.+?)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1</h4>')
+            const formattedText = inputText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
                 .replace(/(第.+?条)/g, '<strong style="font-family: \'SimHei\', sans-serif;">　　$1　</strong>')
                 .split('\n').join('\n');
 
