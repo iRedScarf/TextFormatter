@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>政府文件格式转换器</title>
+    <title>政府文件html格式转换器</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,13 +51,13 @@
     </style>
 </head>
 <body>
-    <h1>政府文件格式转换器</h1>
-    <p>请在下面的输入框中输入标题、文号、标签、发布机构和发布日期：</p>
+    <h1>政府文件html格式转换器</h1>
+    <p>请在下面的输入框中输入文件标题、文号、标签、发布机构和发布日期：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
-    <input type="text" id="tags" placeholder="标签 (用半角逗号分隔)">
+    <input type="text" id="tags" placeholder="标签（用半角逗号“,”分隔）">
     <input type="text" id="author" placeholder="发布机构">
-    <input type="text" id="date" placeholder="发布日期 (格式: yyyy-mm-dd)">
+    <input type="text" id="date" placeholder="发布日期（格式：yyyy-mm-dd）">
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
     <button onclick="convert()">转换格式</button>
