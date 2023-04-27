@@ -87,8 +87,10 @@
     <button onclick="convert()">转换格式</button>
     <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
+    <button onclick="download()">下载为 .md 文件</button>
 
     <script>
+
         function convert() {
             const title = document.getElementById("title").value;
             const subtitle = document.getElementById("subtitle").value;
@@ -120,6 +122,29 @@ date: ${date}
 
             document.getElementById("outputText").value = formattedText;
         }
+
+        function download() {
+            const outputText = document.getElementById("outputText").value;
+            const date = document.getElementById("date").value;
+            if (outputText) {
+                if (date) {
+                    const fileName = `${date}.md`;
+                    const blob = new Blob([outputText], {type: "text/plain;charset=utf-8"});
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = fileName;
+                    link.style.display = "none";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    alert("请输入日期");
+                }
+            } else {
+                alert("请先转换格式");
+            }
+        }
+
     </script>
 
 <footer style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
