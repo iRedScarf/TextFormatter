@@ -82,7 +82,7 @@ author: ${author}
 date: ${date}
 ---
 ` + preProcessedText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
-                .replace(/((?<=\n)(?<!第).+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
+                .replace(/(?<=\n)(.+?条)[\s\u00A0]*([^a-zA-Z0-9]*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n');
 
             document.getElementById("outputText").value = formattedText;
