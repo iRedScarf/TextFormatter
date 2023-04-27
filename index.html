@@ -52,6 +52,7 @@
 
         .flex-item {
             flex-basis: 0;
+            margin-right: 10px;
         }
 
         .flex-item:first-child {
@@ -60,12 +61,13 @@
 
         .flex-item:last-child {
             flex-grow: 2;
+            margin-right: 0;
         }
 
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.3.0</h1>
+    <h1>政府文件html格式转换器 v0.3.1</h1>
     <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -74,10 +76,10 @@
     <input type="text" id="date" placeholder="施行日期（格式：yyyy-mm-dd）">
     <div class="flex-container">
         <div class="flex-item">
-            <input type="text" id="linkName" placeholder="链接名称" />
+            <input type="text" id="linkName" placeholder="链接名称">
         </div>
         <div class="flex-item">
-            <input type="text" id="linkUrl" placeholder="链接地址" />
+            <input type="text" id="linkUrl" placeholder="链接地址">
         </div>
     </div>
 
