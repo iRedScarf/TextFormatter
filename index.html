@@ -82,7 +82,7 @@
                 .replace(/\n[\s\u3000]*\n+/g, '\n')
                 .replace(/^\n+|\n+$/g, '');
 
-            const linkHtml = linkUrl ? `<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
+            const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
             const formattedText = `---
 title: ${title}
@@ -94,7 +94,7 @@ date: ${date}
 ` + preProcessedText
                 .replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
                 .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
-                .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + '\u3000\u3000\n\u3000\u3000\n' + linkHtml;
+                .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
 
             document.getElementById("outputText").value = formattedText;
         }
