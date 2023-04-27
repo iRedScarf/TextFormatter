@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.3.1</h1>
+    <h1>政府文件html格式转换器 v0.4.1</h1>
     <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -138,7 +138,7 @@ date: ${date}
                     link.click();
                     document.body.removeChild(link);
                 } else {
-                    alert("请输入日期");
+                    alert("请输入文件施行日期");
                 }
             } else {
                 alert("请先转换格式");
