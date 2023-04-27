@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>政府文件html格式转换器 v.0.2.2</title>
+    <title>政府文件html格式转换器</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器</h1>
+    <h1>政府文件html格式转换器 v0.2.3</h1>
     <p>请在下面的输入框中输入文件标题、文号、标签、发布机构和发布日期：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -82,7 +82,7 @@ author: ${author}
 date: ${date}
 ---
 ` + preProcessedText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
-                .replace(/(\n|^)(?!.*条件)(.*?条)[\s\u00A0]*(.*?)(\r?\n|$)/g, '$1<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$2\u3000</strong>$3\n')
+                .replace(/(\n|^)(?=.*\b第[^\D]+\b条\b)(.*?条)[\s\u00A0]*(.*?)(\r?\n|$)/g, '$1<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$2\u3000</strong>$3\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n');
 
             document.getElementById("outputText").value = formattedText;
