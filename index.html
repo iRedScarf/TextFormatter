@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.4.1</h1>
+    <h1>政府文件html格式转换器 v0.4.2</h1>
     <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -126,9 +126,20 @@ date: ${date}
         function download() {
             const outputText = document.getElementById("outputText").value;
             const date = document.getElementById("date").value;
+ 
+            function randomString(length) {
+                const characters = 'abcdefgh';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+
             if (outputText) {
                 if (date) {
-                    const fileName = `${date}.md`;
+                    const randomLetters = randomString(5);
+                    const fileName = `${date}-${randomLetters}.md`;
                     const blob = new Blob([outputText], {type: "text/plain;charset=utf-8"});
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
