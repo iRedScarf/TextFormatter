@@ -55,13 +55,13 @@
     <p>请在下面的输入框中输入文件标题、文号、标签、发布机构和发布日期：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
-    <input type="text" id="tags" placeholder="分类/标签（用半角逗号“,”分隔）">
+    <input type="text" id="tags" placeholder="文件类别（用半角逗号“,”分隔）">
     <input type="text" id="author" placeholder="发文机关">
     <input type="text" id="date" placeholder="施行日期（格式：yyyy-mm-dd）">
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
     <button onclick="convert()">转换格式</button>
-    <p>转换后的文本：</p>
+    <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
 
     <script>
@@ -82,7 +82,7 @@ author: ${author}
 date: ${date}
 ---
 ` + preProcessedText.replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
-                .replace(/(?<=\n)(.+?条)[\s\u00A0]*([^a-zA-Z0-9]*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
+                .replace(/((?<=\n)(?<!第).+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n');
 
             document.getElementById("outputText").value = formattedText;
