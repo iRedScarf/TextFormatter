@@ -82,6 +82,8 @@
                 .replace(/\n[\s\u3000]*\n+/g, '\n')
                 .replace(/^\n+|\n+$/g, '');
 
+            const linkHtml = linkUrl ? `<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
+
             const formattedText = `---
 title: ${title}
 subtitle: ${subtitle}
