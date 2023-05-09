@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.4.2</h1>
+    <h1>政府文件html格式转换器 v0.4.3</h1>
     <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -116,8 +116,8 @@ author: ${author}
 date: ${date}
 ---
 ` + preProcessedText
-                .replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 style="text-align: center; font-family: \'SimHei\', sans-serif;">$1$2</h4>\n')
-                .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong style="font-family: \'SimHei\', sans-serif;">\u3000\u3000$1\u3000</strong>$2\n')
+                .replace(/(第.+?章[\s\u00A0]*)(.+?)(\r?\n)/g, '<h4 class="uk-text-center custom-font-simhei">$1$2</h4>\n')
+                .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong class="custom-font-simhei">\u3000\u3000$1\u3000</strong>$2\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
 
             document.getElementById("outputText").value = formattedText;
