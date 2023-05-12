@@ -108,15 +108,15 @@
 
             const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
-            const intermediateText = preProcessedText.replace(/(^|\n)([\s\u3000]*第[^条]+?章[\s\u3000]*)(.*?)(\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
+            const intermediateText = preProcessedText.replace(/(^|\n)([\s\u3000]*第[^条]+?章[\s\u3000]*)(.*?)(\r?\n|$)/g, '<h4 class="uk-text-center custom-font-simhei">$1\u3000$2</h4>\n');
 
             const formattedText = `---
-    title: ${title}
-    subtitle: ${subtitle}
-    tags: [${tags.join(', ')}]
-    author: ${author}
-    date: ${date}
-    ---
+title: ${title}
+subtitle: ${subtitle}
+tags: [${tags.join(', ')}]
+author: ${author}
+date: ${date}
+---
     ` + intermediateText
                 .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong class="custom-font-simhei">\u3000\u3000$1\u3000</strong>$2\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
