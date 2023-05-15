@@ -31,10 +31,11 @@
         }
 
         button {
+            display: inline-block;
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
-            margin: 8px 0;
+            margin: 8px auto;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -79,7 +80,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.5.0</h1>
+    <h1>政府文件html格式转换器 v0.5.1</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -106,31 +107,29 @@
             <input type="text" id="linkUrl" placeholder="链接地址">
         </div>
     </div>
-    <p>颁布/修订记录</p>
     <div id="changelog">
         <div class="changelog-item">
-            <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
+            <input type="text" class="changelog-date" placeholder="首发施行日期（格式：yyyy-mm-dd）">
             <input type="text" class="changelog-title" placeholder="发布记录">
         </div>
     </div>
-    <button onclick="addChangelog()">添加修订记录</button>
+    <button class="small-button" onclick="addChangelog()">添加修订记录</button>
 
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
-    <button onclick="convert()">转换格式</button>
+    <button class="small-button" onclick="convert()">转换格式</button>
     <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
     <button class="small-button" onclick="download()">下载为 .md 文件</button>
 
     <script>
-
         function addChangelog() {
             const changelog = document.getElementById('changelog');
             const div = document.createElement('div');
             div.className = 'changelog-item';
             div.innerHTML = `
-                <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
-                <input type="text" class="changelog-title" placeholder="修订记录">
+                <input type="text" class="changelog-date" placeholder="修正/修订日期（格式：yyyy-mm-dd）">
+                <input type="text" class="changelog-title" placeholder="修正/修订记录">
             `;
             changelog.appendChild(div);
         }
@@ -211,7 +210,6 @@ ${changelog}
                 alert("请先转换格式");
             }
         }
-
     </script>
 
 <footer style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
