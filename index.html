@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.5.2</h1>
+    <h1>政府文件html格式转换器 v0.5.3</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -160,7 +160,7 @@
                 .replace(/\n[\s\u3000]*\n+/g, '\n')
                 .replace(/^\n+|\n+$/g, '');
 
-            const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
+            const linkHtml = linkUrl ? `\u3000\u3000\n@@@\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
             const intermediateText = preProcessedText
                 .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
@@ -181,12 +181,12 @@ date: ${date}
 changelog:
 ${changelog}
 ---
-\u3000\u3000
+@@@\n\u3000\u3000
 ` + intermediateText
                 .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong class="custom-font-simhei">\u3000\u3000$1\u3000</strong>$2\n')
-                .replace(/((?<=\n)(?!(<h4|<strong)).*?)(?=\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
+                .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
 
-            document.getElementById("outputText").value = formattedText;
+                document.getElementById("outputText").value = formattedText.replace(/^\n+|\n+$/g, '').replace(/\n{2,}/g, '\n').replace(/@@@\n/g, '\n\n');
         }
 
         function download() {
