@@ -45,6 +45,10 @@
             opacity: 0.8;
         }
 
+        .small-button {
+            width: 33%;
+        }
+
         .flex-container {
             display: flex;
             justify-content: space-between;
@@ -106,7 +110,7 @@
     <div id="changelog">
         <div class="changelog-item">
             <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
-            <input type="text" class="changelog-title" placeholder="颁布/修订记录">
+            <input type="text" class="changelog-title" placeholder="发布记录">
         </div>
     </div>
     <button onclick="addChangelog()">添加修订记录</button>
@@ -116,7 +120,7 @@
     <button onclick="convert()">转换格式</button>
     <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
-    <button onclick="download()">下载为 .md 文件</button>
+    <button class="small-button" onclick="download()">下载为 .md 文件</button>
 
     <script>
 
@@ -126,7 +130,7 @@
             div.className = 'changelog-item';
             div.innerHTML = `
                 <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
-                <input type="text" class="changelog-title" placeholder="标题">
+                <input type="text" class="changelog-title" placeholder="修订记录">
             `;
             changelog.appendChild(div);
         }
@@ -166,6 +170,7 @@ date: ${date}
 changelog:
 ${changelog}
 ---
+\u3000\u3000
 ` + intermediateText
                 .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong class="custom-font-simhei">\u3000\u3000$1\u3000</strong>$2\n')
                 .replace(/((?<=\n)(?!(<h4|<strong)).*?)(\r?\n|$)/g, '\u3000\u3000$1\n') + linkHtml;
