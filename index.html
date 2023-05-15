@@ -75,8 +75,8 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.4.5</h1>
-    <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
+    <h1>政府文件html格式转换器 v0.5.0</h1>
+    <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
             <input type="text" id="title" placeholder="标题">
@@ -102,6 +102,14 @@
             <input type="text" id="linkUrl" placeholder="链接地址">
         </div>
     </div>
+    <p>颁布/修订记录</p>
+    <div id="changelog">
+        <div class="changelog-item">
+            <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
+            <input type="text" class="changelog-title" placeholder="颁布/修订记录">
+        </div>
+    </div>
+    <button onclick="addChangelog()">添加修订记录</button>
 
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
@@ -111,6 +119,17 @@
     <button onclick="download()">下载为 .md 文件</button>
 
     <script>
+
+        function addChangelog() {
+            const changelog = document.getElementById('changelog');
+            const div = document.createElement('div');
+            div.className = 'changelog-item';
+            div.innerHTML = `
+                <input type="text" class="changelog-date" placeholder="日期（格式：yyyy-mm-dd）">
+                <input type="text" class="changelog-title" placeholder="标题">
+            `;
+            changelog.appendChild(div);
+        }
 
         function convert() {
             const title = document.getElementById("title").value;
@@ -131,12 +150,21 @@
 
             const intermediateText = preProcessedText.replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
 
+            const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
+            const changelog = changelogItems.map(item => {
+                const date = item.querySelector('.changelog-date').value;
+                const title = item.querySelector('.changelog-title').value;
+                return `  - date: ${date}\n    title: ${title}`;
+            }).join('\n');
+
             const formattedText = `---
 title: ${title}
 subtitle: ${subtitle}
 tags: [${tags.join(', ')}]
 author: ${author}
 date: ${date}
+changelog:
+${changelog}
 ---
 ` + intermediateText
                 .replace(/(第.+?条[\s\u00A0]*)(.*?)(\r?\n|$)/g, '<strong class="custom-font-simhei">\u3000\u3000$1\u3000</strong>$2\n')
