@@ -51,7 +51,11 @@
         }
 
         .small-button {
-            width: 33%;
+            background-color: transparent;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            box-shadow: inset 5px 5px 10px 0px #4CAF50;
         }
 
         .flex-container {
@@ -118,18 +122,18 @@
         </div>
     </div>
     <div class="button">
-        <button class="small-button" onclick="addChangelog()">添加修订记录</button>
+        <button class="small-button" onclick="addChangelog()">+</button>
     </div>
 
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
     <div class="button">
-        <button class="small-button" onclick="convert()">转换格式</button>
+        <button onclick="convert()">转换格式</button>
     </div>
     <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
     <div class="button">
-        <button class="small-button" onclick="download()">下载为 .md 文件</button>
+        <button onclick="download()">下载为 .md 文件</button>
     </div>
 
     <script>
