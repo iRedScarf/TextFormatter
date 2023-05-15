@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.4.3</h1>
+    <h1>政府文件html格式转换器 v0.4.5</h1>
     <p>请在下面的输入框中输入文件标题、文号、文件类别、发文机关、施行日期和原文链接（如有）：</p>
     <input type="text" id="title" placeholder="标题">
     <input type="text" id="subtitle" placeholder="文号">
@@ -108,8 +108,8 @@
 
             const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
-            const intermediateText = preProcessedText.replace(/(^|\n)([\s\u3000]*第[^条]+?章[\s\u3000]*)(.*?)(\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
-            
+            const intermediateText = preProcessedText.replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
+
             const formattedText = `---
 title: ${title}
 subtitle: ${subtitle}
