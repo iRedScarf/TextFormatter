@@ -46,7 +46,7 @@
             opacity: 0.8;
         }
 
-        .button {
+        .text-center {
             text-align: center;
         }
 
@@ -121,18 +121,19 @@
             <input type="text" class="changelog-title" placeholder="发布记录">
         </div>
     </div>
-    <div class="button">
+    <div class="text-center">
         <button class="small-button" onclick="addChangelog()">+</button>
     </div>
+    <p class="text-center">添加修订记录</p>
 
     <p>原始文本：</p>
     <textarea id="inputText" placeholder="在这里粘贴或输入原始文本..."></textarea>
-    <div class="button">
+    <div class="text-center">
         <button onclick="convert()">转换格式</button>
     </div>
     <p>转换后的html文本：</p>
     <textarea id="outputText" readonly placeholder="转换后的文本将显示在这里..."></textarea>
-    <div class="button">
+    <div class="text-center">
         <button onclick="download()">下载为 .md 文件</button>
     </div>
 
