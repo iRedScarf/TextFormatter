@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.5.6</h1>
+    <h1>政府文件html格式转换器 v0.5.7</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -159,17 +159,14 @@
             const preProcessedText = inputText
             .replace(/(^[ \u3000]+|[ \u3000]+$)/gm, "")  // 删除所有行的开头和结尾的空格
             .replace(/(第.+?条)[\s\u00A0]*/g, '$1')  // 删除"第x条"后的空格
-            .replace(/\n[\s\u3000]*\n+/g, '\n')  // 删除多余的空行
+            .replace(/\n[\s\u3000]*\n+/g, '')  // 删除多余的空行
             .replace(/^\n+|\n+$/g, '');  // 删除文本开头和结尾的换行符
     
             const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
             // 处理标题
-            let intermediateText = preProcessedText
+            const intermediateText = preProcessedText
                 .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>\n');
-    
-            // 移除两个换行符之间只包含空白字符（全角/半角空格，制表符等）的行
-            intermediateText = intermediateText.replace(/\n[\s\u3000]*\n/g, '\n');
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
             const changelog = changelogItems.map(item => {
