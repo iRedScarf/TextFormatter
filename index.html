@@ -162,7 +162,7 @@
             .replace(/\n[\s\u3000]*\n+/g, '\n')  // 删除多余的空行
             .replace(/^\n+|\n+$/g, '');  // 删除文本开头和结尾的换行符
     
-            const linkHtml = linkUrl ? `\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
+            const linkHtml = linkUrl ? `\n\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
 
             // 处理标题
             const intermediateText = preProcessedText
@@ -189,7 +189,7 @@ ${changelog}
 \u3000\u3000
 ` + intermediateText
                 .replace(/(^|\n)(第.+?条)[\s\u00A0]*(.*?)(?=\r?\n|$)/g, '$1<strong class="custom-font-simhei">\u3000\u3000$2\u3000</strong>$3')  // 处理"第x条"
-                .replace(/((?<=\n)(?!(<h4|<strong)).*?\S.*?)(?=\r?\n|$)/g, '\u3000\u3000$1') + linkHtml;
+                .replace(/((?<=\n)(?!(<h4|<p|<strong)).*?\S.*?)(?=\r?\n|$)/g, '\u3000\u3000$1') + linkHtml;
     
             document.getElementById("outputText").value = formattedText;
         }
