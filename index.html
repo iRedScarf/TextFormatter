@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.5.8</h1>
+    <h1>政府文件html格式转换器 v0.5.9</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -167,6 +167,7 @@
             // 处理标题
             const intermediateText = preProcessedText
                 .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>');
+                .replace(/(^|\n)[\s\u3000]*(第[^节]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<p class="uk-text-center"><strong>$2\u3000$3</strong></p>');
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
             const changelog = changelogItems.map(item => {
