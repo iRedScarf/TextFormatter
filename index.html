@@ -166,7 +166,7 @@
 
             // 处理标题
             const intermediateText = preProcessedText
-                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>');
+                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>')
                 .replace(/(^|\n)[\s\u3000]*(第[^节]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<p class="uk-text-center"><strong>$2\u3000$3</strong></p>');
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
