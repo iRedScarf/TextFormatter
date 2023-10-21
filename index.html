@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>政府文件html格式转换器</title>
+    <title>政府文件Markdown格式转换器</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件html格式转换器 v0.6.0</h1>
+    <h1>政府文件md格式转换器 v0.1.0</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -162,12 +162,12 @@
             .replace(/\n[\s\u3000]*\n+/g, '\n')  // 删除多余的空行
             .replace(/^\n+|\n+$/g, '');  // 删除文本开头和结尾的换行符
     
-            const linkHtml = linkUrl ? `\n\u3000\u3000\n\u3000\u3000\n<span style="color: gray;">\u3000\u3000原文地址：</span><a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: gray;">${linkName}</a>` : '';
+            const linkHtml = linkUrl ? `\n\n---\n\u3000\u3000原文地址：[${linkName}](${linkUrl})` : '';
 
             // 处理标题
             const intermediateText = preProcessedText
-                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<h4 class="uk-text-center custom-font-simhei">$2\u3000$3</h4>')
-                .replace(/(^|\n)[\s\u3000]*(第[^条]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1<p class="uk-text-center"><strong>$2\u3000$3</strong></p>');
+                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1###$2\u3000')
+                .replace(/(^|\n)[\s\u3000]*(第[^条]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '$1####$2\u3000');
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
             const changelog = changelogItems.map(item => {
@@ -188,7 +188,7 @@ ${changelog}
 ---
 \u3000\u3000
 ` + intermediateText
-                .replace(/(^|\n)(第.+?条)[\s\u00A0]*(.*?)(?=\r?\n|$)/g, '$1<strong class="custom-font-simhei">\u3000\u3000$2\u3000</strong>$3')  // 处理"第x条"
+                .replace(/(^|\n)(第.+?条)[\s\u00A0]*(.*?)(?=\r?\n|$)/g, '$1\u3000\u3000**$2**\u3000$3')  // 处理"第x条"
                 .replace(/((?<=\n)(?!(<h4|<p|<strong)).*?\S.*?)(?=\r?\n|$)/g, '\u3000\u3000$1') + linkHtml;
     
             document.getElementById("outputText").value = formattedText;
