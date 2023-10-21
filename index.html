@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件md格式转换器 v0.1.1</h1>
+    <h1>政府文件md格式转换器 v0.1.2</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -166,28 +166,31 @@
 
             // 处理标题
             const intermediateText = preProcessedText
-                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '\n$1###$2\u3000')
-                .replace(/(^|\n)[\s\u3000]*(第[^条]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '\n$1####$2\u3000');
+                .replace(/(^|\n)[\s\u3000]*(第[^条]+?章)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '\n$1### $2\u3000$3')
+                .replace(/(^|\n)[\s\u3000]*(第[^条]+?节)[\s\u3000]*(.*?)(?=\r?\n|$)/g, '\n$1#### $2\u3000');
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
             const changelog = changelogItems.map(item => {
                 const date = item.querySelector('.changelog-date').value;
                 const title = item.querySelector('.changelog-title').value;
-                return `  - date: ${date}\n    title: ${title}\n`;
+                return `${title}`;
             }).join('\n');
     
             // 最终处理文本
             const formattedText = `---
 title: ${title}
-subtitle: ${subtitle}
-tags: [${tags.join(', ')}]
-author: ${author}
-date: ${date}
-changelog:
-${changelog}
 ---
-\n
-` + intermediateText
+# ${title}
+
+<div class="text-center mb-10">
+
+<strong>${subtitle}</strong>
+
+${author}
+
+</div>
+
+\u3000\u3000${changelog}\n` + intermediateText
                 .replace(/(^|\n)(第.+?条)[\s\u00A0]*(.*?)(?=\r?\n|$)/g, '$1\n\u3000\u3000\*\*$2\*\*\u3000$3')  // 处理"第x条"
                 .replace(/((?<=\n)(?!(##|\*\*|\u3000)).*?\S.*?)(?=\r?\n|$)/g, '\n\u3000\u3000$1') + linkHtml;
     
