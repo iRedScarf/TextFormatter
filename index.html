@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件md格式转换器 v0.1.2</h1>
+    <h1>政府文件md格式转换器 v0.2.0</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -173,24 +173,32 @@
             const changelog = changelogItems.map(item => {
                 const date = item.querySelector('.changelog-date').value;
                 const title = item.querySelector('.changelog-title').value;
-                return `${title}`;
-            }).join('\n');
+                return `- ${title}`;
+            }).join('\n\n      ');
     
             // 最终处理文本
             const formattedText = `---
 title: ${title}
 ---
+import { Callout } from 'nextra/components'
+
 # ${title}
 
-<div class="text-center mb-10">
+<div class="mx-8 mb-6 text-center">
 
-<strong>${subtitle}</strong>
+  <strong>${subtitle}</strong>
 
-${author}
+  ${author}
+
+  <div class="text-left">
+    <Callout type="default" emoji="" class="text-left">
+      ${changelog}
+    </Callout>
+  </div>
 
 </div>
 
-\u3000\u3000${changelog}\n` + intermediateText
+` + intermediateText
                 .replace(/(^|\n)(第.+?条)[\s\u00A0]*(.*?)(?=\r?\n|$)/g, '$1\n\u3000\u3000\*\*$2\*\*\u3000$3')  // 处理"第x条"
                 .replace(/((?<=\n)(?!(##|\*\*|\u3000)).*?\S.*?)(?=\r?\n|$)/g, '\n\u3000\u3000$1') + linkHtml;
     
