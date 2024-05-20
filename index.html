@@ -84,8 +84,8 @@
     </style>
 </head>
 <body>
-    <h1>政府文件mdx格式转换器 v0.2.1</h1>
-    <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、文件类别、原文链接以及修订过程：</p>
+    <h1>政府文件mdx格式转换器 v0.2.2</h1>
+    <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
             <input type="text" id="title" placeholder="标题">
@@ -102,7 +102,7 @@
             <input type="text" id="date" placeholder="施行日期（格式：yyyy-mm-dd）">
         </div>
     </div>
-    <input type="text" id="tags" placeholder="文件类别（用半角逗号“,”分隔）">
+
     <div class="flex-container">
         <div class="flex-item flex-item-1-2">
             <input type="text" id="linkName" placeholder="链接名称">
@@ -114,7 +114,7 @@
     <div id="changelog">
         <p>文件颁布、修订过程：</p>
         <div class="changelog-item">
-            <input type="text" class="changelog-date" placeholder="首发施行日期（格式：yyyy-mm-dd）">
+
             <input type="text" class="changelog-title" placeholder="发布记录">
         </div>
     </div>
@@ -139,7 +139,7 @@
             const div = document.createElement('div');
             div.className = 'changelog-item';
             div.innerHTML = `
-                <input type="text" class="changelog-date" placeholder="修正/修订日期（格式：yyyy-mm-dd）">
+
                 <input type="text" class="changelog-title" placeholder="修正/修订记录">
             `;
             changelog.appendChild(div);
