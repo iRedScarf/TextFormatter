@@ -84,7 +84,7 @@
     </style>
 </head>
 <body>
-    <h1>政府文件mdx格式转换器 v0.2.2</h1>
+    <h1>政府文件mdx格式转换器 v0.2.3</h1>
     <p>请在下面的输入框中输入文件标题、文号、发文机关、施行日期、原文链接以及修订过程：</p>
     <div class="flex-container">
         <div class="flex-item flex-item-1-1">
@@ -102,7 +102,6 @@
             <input type="text" id="date" placeholder="施行日期（格式：yyyy-mm-dd）">
         </div>
     </div>
-
     <div class="flex-container">
         <div class="flex-item flex-item-1-2">
             <input type="text" id="linkName" placeholder="链接名称">
@@ -114,7 +113,6 @@
     <div id="changelog">
         <p>文件颁布、修订过程：</p>
         <div class="changelog-item">
-
             <input type="text" class="changelog-title" placeholder="发布记录">
         </div>
     </div>
@@ -139,7 +137,6 @@
             const div = document.createElement('div');
             div.className = 'changelog-item';
             div.innerHTML = `
-
                 <input type="text" class="changelog-title" placeholder="修正/修订记录">
             `;
             changelog.appendChild(div);
@@ -148,7 +145,6 @@
         function convert() {
             const title = document.getElementById("title").value;
             const subtitle = document.getElementById("subtitle").value;
-
             const author = document.getElementById("author").value;
             const date = document.getElementById("date").value;
             const inputText = document.getElementById("inputText").value;
@@ -171,7 +167,6 @@
 
             const changelogItems = Array.from(document.querySelectorAll('.changelog-item'));
             const changelog = changelogItems.map(item => {
-
                 const title = item.querySelector('.changelog-title').value;
                 return `- ${title}`;
             }).join('\n\n      ');
